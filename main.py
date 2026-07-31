@@ -342,13 +342,13 @@ def conjunctive_search(req: ConjunctiveRequest):
     if not req.word_ids:
         raise HTTPException(status_code=400, detail="No word IDs provided")
 
-    if not os.path.exists(os.path.join(BASE_DIR, "update_count.csv")) or not os.path.exists(os.path.join(BASE_DIR, "odxt_config.txt")):
+    if not os.path.exists(os.path.join(BASE_DIR, "update_count.csv")) and not os.path.exists(os.path.join(BASE_DIR, "bf.dat")):
         return {
             "command": "./ntru-oqxt-search " + " ".join(req.word_ids),
             "exit_code": 1,
-            "output": "No setup found - upload files first (setup writes odxt_config.txt)",
+            "output": "No setup found - upload files first",
             "stdout": "",
-            "stderr": "No setup found - upload files first (setup writes odxt_config.txt)",
+            "stderr": "No setup found - upload files first",
             "word_ids":   req.word_ids,
             "words":      req.words,
             "time_taken": 0,
