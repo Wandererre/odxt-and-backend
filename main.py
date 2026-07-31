@@ -342,7 +342,7 @@ def conjunctive_search(req: ConjunctiveRequest):
     if not req.word_ids:
         raise HTTPException(status_code=400, detail="No word IDs provided")
 
-    if not os.path.exists(os.path.join(BASE_DIR, "update_count.csv")) and not os.path.exists(os.path.join(BASE_DIR, "bf.dat")):
+    if not os.path.exists(os.path.join(BASE_DIR, "bf.dat")):
         return {
             "command": "./ntru-oqxt-search " + " ".join(req.word_ids),
             "exit_code": 1,
