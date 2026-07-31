@@ -1220,7 +1220,7 @@ int TSet_SetUp()
     N_words = (N_max_ids/N_threads) + ((N_max_ids%N_threads==0)?0:1);
     N_max_id_words = N_words * N_threads;
 
-    RedisClient redis;
+    static RedisClient redis;
     
     int datasize = (2*N_l) + 16;
 
