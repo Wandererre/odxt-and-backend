@@ -5,7 +5,7 @@ LD = g++
 CFLAGS = -I/usr/local/include -I. -I./blake3/ -w -O3 -std=c++17 -msse2 -msse -mssse3 -mavx2 -msse4.1 -ffast-math -maes -fpermissive -fopenmp -DBLAKE3_NO_AVX512
 
 # Linker flags
-LDFLAGS = -lcryptopp -lpthread -lgmpxx -lssl -lhiredis -lhiredis_ssl -lcrypto -lntl -lgmp -lm -lrt
+LDFLAGS = -lcryptopp -lpthread -lgmpxx -lssl -lhiredis_ssl -lhiredis -lcrypto -lntl -lgmp -lm -lrt
 
 BLAKE3_SRCS = ./blake3/blake_hash.cpp ./blake3/blake3.c ./blake3/blake3_dispatch.c ./blake3/blake3_portable.c ./blake3/blake3_avx2.c ./blake3/blake3_sse2.c ./blake3/blake3_sse41.c
 
