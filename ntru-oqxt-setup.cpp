@@ -1290,6 +1290,7 @@ int TSet_SetUp()
 
     std::string db_in_key = "";
     std::string db_in_val = "";
+    std::vector<std::pair<std::string, std::string>> batch_kv;
 
     for(int n=0;n<n_rows;++n){
 
@@ -1424,7 +1425,7 @@ int TSet_SetUp()
             db_in_val.clear();
             db_in_key = HexToStr(TBIDX,2) + HexToStr(TJIDX,2) + HexToStr(TLBL,12);
             db_in_val = HexToStr(TVAL,datasize+1);
-            redis.set(db_in_key.data(), db_in_val.data());
+            batch_kv.push_back({db_in_key, db_in_val});
 
             tw_local += datasize;
             total_count++;
@@ -1432,6 +1433,7 @@ int TSet_SetUp()
     
     }
  
+    redis.mset(batch_kv);
     std::cout << "Total ID Count: " << total_count << std::endl;
 
     delete [] TW;
