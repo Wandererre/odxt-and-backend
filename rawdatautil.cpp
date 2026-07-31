@@ -339,11 +339,12 @@ int StrToHex(unsigned char *hexarr,string numin)
 {
     std::string dest = std::string( 64-numin.length(), '0').append( numin);
     const char *text = dest.data();
-    char temp[2];
+    char temp[3];
     for (int j=0; j<32; j++)
     {
         temp[0] = text[2*j];
         temp[1] = text[2*j+1];
+        temp[2] = '\0';
         hexarr[j] = ::strtoul(temp,nullptr,16) & 0xFF;
     }
     return 0;
@@ -352,11 +353,13 @@ int StrToHex(unsigned char *hexarr,string numin)
 int StrToHexBVec(unsigned char *hexarr,string bvec)
 {
     const char *text = bvec.data();
-    char temp[2];
+    char temp[3];
     for (int j=0; j<4; j++)
     {
+        if (bvec.length() < (size_t)(2*j+2)) break;
         temp[0] = text[2*j];
         temp[1] = text[2*j+1];
+        temp[2] = '\0';
         hexarr[j] = ::strtoul(temp,nullptr,16) & 0xFF;
     }
     return 0;
