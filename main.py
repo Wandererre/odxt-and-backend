@@ -342,18 +342,6 @@ def conjunctive_search(req: ConjunctiveRequest):
     if not req.word_ids:
         raise HTTPException(status_code=400, detail="No word IDs provided")
 
-    if not os.path.exists(os.path.join(BASE_DIR, "bloom_filter.dat")):
-        return {
-            "command": "./ntru-oqxt-search " + " ".join(req.word_ids),
-            "exit_code": 1,
-            "output": "No setup found - upload files first",
-            "stdout": "",
-            "stderr": "No setup found - upload files first",
-            "word_ids":   req.word_ids,
-            "words":      req.words,
-            "time_taken": 0,
-        }
-
     t0     = time.perf_counter()
     result = run_binary(SEARCH_BINARY, req.word_ids, timeout=30)
     ms     = round((time.perf_counter() - t0) * 1000, 4)
